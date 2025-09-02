@@ -17,6 +17,8 @@ Tasks are stored in a local JSON file (tasks.json) so your list persists between
 
     🔧 Beginner-friendly code structure using     modernimport/export syntax.
 
+    🖌️ Color coded with 'chalk' npm
+
 2. PROJECT STRUCTURE
     task-manager-node/
     │── main.js         # Entry point (handles CLI commands)
