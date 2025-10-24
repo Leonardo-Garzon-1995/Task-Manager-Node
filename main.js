@@ -1,6 +1,6 @@
 import { addTask, listTasks, completeTask, deleteTask } from "./tasks.js";
 
-import divider, { formatTask } from "./utils.js";
+import divider, { formatTask, banner } from "./utils.js";
 
 import chalk from "chalk";
 
@@ -20,7 +20,9 @@ switch (command) {
 
     case "list": {  // command: list - it shows the updated list
         divider();
-        console.log("📋 TASK LIST:");
+
+        banner("TASK LIST", "yellow");
+
         listTasks().forEach(task => console.log(formatTask(task)));
         break;
     }
@@ -61,6 +63,5 @@ switch (command) {
     console.log("   node main.js list");
     console.log("   node main.js complete <taskId>");
 }
-
 
 
