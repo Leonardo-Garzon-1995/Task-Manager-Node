@@ -63,5 +63,3 @@ switch (command) {
     console.log("   node main.js list");
     console.log("   node main.js complete <taskId>");
 }
-
-

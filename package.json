@@ -4,7 +4,11 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "list": "node main.js list",
+    "add": "node main.js add",
+    "complete": "node main.js complete",
+    "delete": "node main.js delete"
   },
   "keywords": [],
   "author": "",

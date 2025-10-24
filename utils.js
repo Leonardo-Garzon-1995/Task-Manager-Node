@@ -10,6 +10,7 @@ export default function divider() {
 }
 
 
+// How the banner will be displayed
 const colors = {
     red: "\x1b[31m",
     green: "\x1b[32m",
