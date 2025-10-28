@@ -21,7 +21,10 @@ switch (command) {
     case "list": {  // command: list - it shows the updated list
         divider();
 
-        banner("TASK LIST", "yellow");
+        const colors = ["red", "green", "yellow", "blue", "magenta", "cyan", "white", "reset"];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+        banner("TASK LIST", randomColor);
 
         listTasks().forEach(task => console.log(formatTask(task)));
         break;
@@ -50,7 +53,7 @@ switch (command) {
         }
         const task = deleteTask(id);
         if (task) {
-            console.log(chack.red("🗑️ Task deleted:", formatTask(task)));
+            console.log(chalk.red("🗑️ Task deleted:", formatTask(task)));
         } else {
             console.log("❌ Task not found.");
         }

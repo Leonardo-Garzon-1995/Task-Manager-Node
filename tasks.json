@@ -1,37 +1,12 @@
 [
   {
     "id": 1,
-    "title": "task 1",
+    "title": "push cli-task manager tomorrow",
     "completed": false
   },
   {
     "id": 2,
-    "title": "work out",
-    "completed": true
-  },
-  {
-    "id": 3,
-    "title": "New Task",
-    "completed": true
-  },
-  {
-    "id": 4,
-    "title": "Hello",
-    "completed": false
-  },
-  {
-    "id": 5,
-    "title": "Learn Lenguage",
-    "completed": true
-  },
-  {
-    "id": 6,
-    "title": "hello",
-    "completed": false
-  },
-  {
-    "id": 7,
-    "title": "come",
+    "title": "check data Anotation",
     "completed": false
   }
 ]
