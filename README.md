@@ -5,62 +5,81 @@ You can add tasks, list them, mark them as complete and delete them directly fro
 Tasks are stored in a local JSON file (tasks.json) so your list persists between sessions.
 
 1. FEATURES
-    ✅ Add new tasks with a title.
 
-    📋 List all tasks (with status: complete or incomplete).
+    - Add new tasks with a title.
 
-    ✔ Mark tasks as completed.
+    - List all tasks (with status: complete or incomplete).
 
-    🗑️Delete them.
+    - Mark tasks as completed.
 
-    💾 Tasks are saved in tasks.json for persistence.
+    - Delete them.
 
-    🔧 Beginner-friendly code structure using     modernimport/export syntax.
-
-    🖌️ Color coded with 'chalk' npm
-
-2. PROJECT STRUCTURE
-    task-manager-node/
-    │── main.js         # Entry point (handles CLI commands)
-    │── tasks.js        # Task management (add, list, complete)
-    │── utils.js        # Helper functions (formatter + divider)
-    │── tasks.json      # Stores the tasks (auto-created if missing)
-    │── package.json    # Project metadata
+    - Tasks are saved in tasks.json for persistence.
 
 3. INSTALLATION
+
     1. Make sure you have Node.js v18+ installed.
+        ```bash
         node -v
+        ```
+
     2. Clone or download this repository.
-        git clone https://github.com
+        ```bash
+        git clone https://github.com/Leonardo-Garzon-1995/Task-Manager-Node.git
         cd task-manager-node
+        ```
+
     3. Initialize dependencies
+        ```bash
         npm init -y
+        ```
+
 
 4. USAGE
     1. Run commands using:
-            node main.js <command> [arguments]
+        ```bash
+        node main.js <command> [arguments]
+        ```
+        or use npm script:
+        ```bash
+        npm run <command> [arguments]
+        ```
     2. Add a task
+        ```bash
             node main.js add "Learn a new language"
-        OUTPUT
-            Task added: [ ] 1: Learn a new language
+        ```
+        or use npm script:
+        ```bash
+            npm run add "Learn a new language"
+        ```
     3. List all tasks
-            node main.js list
-        OUTPUT
-            ====================
-            📋 TASK LIST:
-            [ ] 1: Learn a new language
-            [✔] 2: Practice cooking
-            [ ] 3: Learn how to write code
+        ```bash
+        node main.js list
+        ```
+        or use npm script:
+        ```bash
+        npm run list
+        ```
     4. Mark as complete
-            node main.js complete 1
-        OUTPUT
-            Task completed: [✔] 1: Learn a new language
+        ```bash
+        node main.js complete 1
+        ```
+        or use npm script:
+        ```bash
+        npm run complete 1
+        ```
     5. Delete a task
-            node main.js delete 1
-        OUTPUT
-            Task deleted: [ ] 1: Learn a new language
+        ```bash
+        node main.js delete 1
+        ```
+        or use npm script:
+        ```bash
+        npm run delete 1
+        ```
+
 
 5. HOW IT WORKS
+
     1. main.js → Reads CLI arguments (process.argv), determines the command, and calls functions.
 
     2. tasks.js → Handles loading/saving tasks in tasks.json.
@@ -68,33 +87,6 @@ Tasks are stored in a local JSON file (tasks.json) so your list persists between
     3. utils.js → Handles formatting and pretty-printing tasks.
 
     4. tasks.json → Stores your tasks persistently in JSON format.
-
-6. EXAMPLE WORKFLOW
-    INPUT
-        node main.js add "Go for a run"
-        node main.js add "Read a book"
-        node main.js list
-        node main.js complete 2
-        node main.js list
-    OUTPUT
-        ✅ Task added: [ ] 1: Go for a run
-        ✅ Task added: [ ] 2: Read a book
-        ====================
-        📋 TASK LIST:
-        [ ] 1: Go for a run
-        [ ] 2: Read a book
-        ✅ Task completed: [✔] 2: Read a book
-        ====================
-        📋 TASK LIST:
-        [ ] 1: Go for a run
-        [✔] 2: Read a book
-
-7. FUTURE IMPROVEMENTS
-    ✏️ Edit task titles.
-
-    📆 Add due dates & priorities.
-
-    🌐 Build a web-based version.
     
 
-AUTHOR: Built with Node.js by Leoanrdo Garzon.
+By Leoanrdo Garzon.
