@@ -1,12 +1,12 @@
 [
   {
     "id": 1,
-    "title": "push cli-task manager tomorrow",
+    "title": "push changes",
     "completed": false
   },
   {
     "id": 2,
-    "title": "check data Anotation",
+    "title": "check Data Anotation",
     "completed": false
   }
 ]
