@@ -30,7 +30,7 @@ const colors = {
 };
 export function banner(text, col) {
     console.log(colors[col]);
-        console.log("╔" + "=".repeat(60) + "╗");
+        console.log("╔" + "═".repeat(60) + "╗");
         console.log("║ " + colors.reset + text.padEnd(59) + colors[col] + "║");
         console.log("╚" + "═".repeat(60) + "╝" + colors.reset);
 }

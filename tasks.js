@@ -15,10 +15,14 @@ function saveTasks(tasks) {
     fs.writeFileSync(FILE, JSON.stringify(tasks, null, 2));
 }
 
+function nextId(arr) {
+    const ids = arr.map(t => t.id)
+    return ids.length ? Math.max(...ids) + 1 : 1
+}
 export function addTask(title) {
     const tasks = loadTasks()
     const task = { 
-        id: tasks.length + 1,
+        id: nextId(tasks),
         title,
         completed: false
     }
@@ -29,6 +33,9 @@ export function addTask(title) {
 }
 
 export function listTasks() {
+    if (!fs.existsSync(FILE) || fs.readFileSync(FILE, "utf-8") === "[]") {
+        console.log("Tasks list is empty.");
+    }
     return loadTasks()
 }
 
@@ -54,4 +61,8 @@ export function deleteTask(id) {
         return removed;
     }
     return null;
+}
+
+export function clearTasks() {
+    fs.writeFileSync(FILE, "[]")
 }

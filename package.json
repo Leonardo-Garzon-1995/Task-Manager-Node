@@ -8,7 +8,8 @@
     "list": "node main.js list",
     "add": "node main.js add",
     "complete": "node main.js complete",
-    "delete": "node main.js delete"
+    "delete": "node main.js delete",
+    "clear": "node main.js clear"
   },
   "keywords": [],
   "author": "",

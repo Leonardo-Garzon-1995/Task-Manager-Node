@@ -1,4 +1,4 @@
-import { addTask, listTasks, completeTask, deleteTask } from "./tasks.js";
+import { addTask, listTasks, completeTask, deleteTask, clearTasks } from "./tasks.js";
 
 import divider, { formatTask, banner } from "./utils.js";
 
@@ -57,6 +57,12 @@ switch (command) {
         } else {
             console.log("❌ Task not found.");
         }
+        break;
+    }
+
+    case "clear": {   // command: clear - it clears the tasks list
+        clearTasks();
+        console.log("✅ Tasks list cleared.");
         break;
     }
 
