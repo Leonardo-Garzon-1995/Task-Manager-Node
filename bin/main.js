@@ -70,9 +70,15 @@ switch (command) {
     }
 
     default:
-    console.log(chalk.red("❓ Unknown command. Use:"));
-    console.log("   node main.js add \"Task description\"");
-    console.log("   node main.js list");
-    console.log("   node main.js complete <taskId>");
-    console.log("   node main.js delete <taskId>");
+        console.log(chalk.red("❌ Unknown command. Use:"));
+        console.log("   tsk [command] [<options>/arguments]");
+        console.log("")
+        console.log(chalk.green("COMMANDS:"));
+        console.log("   add \"Task description\"");
+        console.log("   list");
+        console.log("   complete <taskId>");
+        console.log("   delete <taskId>");
+        console.log("   clear");
+        break;
+
 }
