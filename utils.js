@@ -5,15 +5,15 @@ import chalk from "chalk";
 // How the tasks list will be displayed on the console
 export function formatTask(task) {
     if (task.completed) {
-        return chalk.green(`[✔] ${task.id}: ${task.title}`)
+        return chalk.green(`[✔] ${task.id}. ${task.title}`)
     } else {
-        return `[ ] ${task.id}: ${task.title}`
+        return `[ ] ${task.id}. ${task.title}`
     }
     // return `[${task.completed ? "✔" : " "}] ${task.id}: ${task.title}`
 }
 
 export default function divider() {
-    console.log("=".repeat(20))
+    console.log("=".repeat(25))
 }
 
 
