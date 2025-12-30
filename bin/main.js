@@ -1,6 +1,8 @@
-import { addTask, listTasks, completeTask, deleteTask, clearTasks } from "./tasks.js";
+#!/usr/bin/env node
 
-import divider, { formatTask, banner } from "./utils.js";
+import { addTask, listTasks, completeTask, deleteTask, clearTasks } from "../tasks.js";
+
+import divider, { formatTask, banner } from "../utils.js";
 
 import chalk from "chalk";
 
@@ -27,6 +29,7 @@ switch (command) {
         banner("TASK LIST", randomColor);
 
         listTasks().forEach(task => console.log(formatTask(task)));
+        console.log("");
         break;
     }
 
