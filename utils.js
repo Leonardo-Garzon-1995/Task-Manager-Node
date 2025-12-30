@@ -35,3 +35,15 @@ export function banner(text, col) {
         console.log("╚" + "═".repeat(60) + "╝" + colors.reset);
         console.log("")
 }
+
+export function displayHelpInstructions() {
+    console.log("   tsk [command] [<options>/arguments]");
+    console.log("")
+    console.log(chalk.green("COMMANDS:"));
+    console.log("   add \"Task description\"");
+    console.log("   list");
+    console.log("   complete <taskId>");
+    console.log("   delete <taskId>");
+    console.log("   clear");
+    console.log("   help");
+}

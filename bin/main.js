@@ -2,7 +2,7 @@
 
 import { addTask, listTasks, completeTask, deleteTask, clearTasks } from "../tasks.js";
 
-import divider, { formatTask, banner } from "../utils.js";
+import divider, { formatTask, banner, displayHelpInstructions } from "../utils.js";
 
 import chalk from "chalk";
 
@@ -69,16 +69,14 @@ switch (command) {
         break;
     }
 
+    case "help": {   // command: help - it shows the help instructions
+        displayHelpInstructions();
+        break;
+    }
+
     default:
         console.log(chalk.red("❌ Unknown command. Use:"));
-        console.log("   tsk [command] [<options>/arguments]");
-        console.log("")
-        console.log(chalk.green("COMMANDS:"));
-        console.log("   add \"Task description\"");
-        console.log("   list");
-        console.log("   complete <taskId>");
-        console.log("   delete <taskId>");
-        console.log("   clear");
+        displayHelpInstructions();
         break;
 
 }
