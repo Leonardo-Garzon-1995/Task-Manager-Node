@@ -1,5 +1,7 @@
 node_modules/
 
+json_to_csv/
+
 test.js
 
 storage.txt
