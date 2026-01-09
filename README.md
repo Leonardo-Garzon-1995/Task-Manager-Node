@@ -138,15 +138,15 @@ Tasks are stored in a local JSON file (tasks.json) so your list persists between
     ```
 
 
-5. HOW IT WORKS
+## 4. HOW IT WORKS
 
-    1. main.js → Reads CLI arguments (process.argv), determines the command, and calls functions.
+1. main.js → Reads CLI arguments (process.argv), determines the command, and calls functions.
 
-    2. tasks.js → Handles loading/saving tasks in tasks.json and the logic behind each command.
+2. tasks.js → Handles loading/saving tasks in tasks.json and the logic behind each command.
 
-    3. utils.js → Handles formatting and pretty-printing tasks.
+3. utils.js → Handles formatting and pretty-printing tasks.
 
-    4. tasks.json → Stores your tasks persistently in JSON format.
+4. tasks.json → Stores your tasks persistently in JSON format.
 
 ## CONTRIBUTING
 Feel free to fork the repository and submit pull requests. Check out the [contribution]() guide.
