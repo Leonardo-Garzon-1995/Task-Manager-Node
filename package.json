@@ -12,7 +12,8 @@
     "add": "node main.js add",
     "complete": "node main.js complete",
     "delete": "node main.js delete",
-    "clear": "node main.js clear"
+    "clear": "node main.js clear",
+    "help": "node main.js help"
   },
   "keywords": [],
   "author": "",

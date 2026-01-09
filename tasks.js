@@ -1,7 +1,11 @@
 // tasks.js
 import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const FILE = "./tasks.json";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const FILE = path.join(__dirname, "tasks.json");
 
 // Load tasks from file (or empty array if file doesn't exist)
 function loadTasks() {
@@ -23,6 +27,7 @@ export function addTask(title) {
     const tasks = loadTasks()
     const task = { 
         id: nextId(tasks),
+        date: new Date().toLocaleString(),
         title,
         completed: false
     }

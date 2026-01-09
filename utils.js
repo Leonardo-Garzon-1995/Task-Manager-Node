@@ -2,7 +2,7 @@
 
 import chalk from "chalk";
 
-// How the tasks list will be displayed on the console
+// How the tasks will be displayed on the console
 export function formatTask(task) {
     if (task.completed) {
         return chalk.green(`[✔] ${task.id}. ${task.title}`)
@@ -37,13 +37,14 @@ export function banner(text, col) {
 }
 
 export function displayHelpInstructions() {
+    console.log("")
     console.log("   tsk [command] [<options>/arguments]");
     console.log("")
-    console.log(chalk.green("COMMANDS:"));
-    console.log("   add \"Task description\"");
-    console.log("   list");
-    console.log("   complete <taskId>");
-    console.log("   delete <taskId>");
-    console.log("   clear");
-    console.log("   help");
+    console.log(chalk.green("   COMMANDS:"));
+    console.log("       add \"Task description\"");
+    console.log("       list");
+    console.log("       complete <taskId>");
+    console.log("       delete <taskId>");
+    console.log("       clear");
+    console.log("       help");
 }
