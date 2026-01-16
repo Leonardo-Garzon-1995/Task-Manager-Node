@@ -21,7 +21,7 @@ switch (command) {
     }
 
     case "list": {  // command: list - it shows the updated list
-        const colors = ["red", "green", "yellow", "blue", "magenta", "cyan", "white", "reset"];
+        const colors = ["red", "green", "yellow", "blue", "magenta", "cyan", "white", "brightred", "brightgreen", "brightyellow", "brightblue", "brightmagenta", "brightcyan", "reset"];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
         banner("TASK LIST", randomColor);
