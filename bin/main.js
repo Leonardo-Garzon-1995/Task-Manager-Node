@@ -16,13 +16,11 @@ switch (command) {
             break
         }
         const task = addTask(title);
-        console.log("✅ Task added:", chalk.blue(formatTask(task)));
+        console.log("✅ Task added:", chalk.cyan(formatTask(task)));
         break;
     }
 
     case "list": {  // command: list - it shows the updated list
-        divider();
-
         const colors = ["red", "green", "yellow", "blue", "magenta", "cyan", "white", "reset"];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
 

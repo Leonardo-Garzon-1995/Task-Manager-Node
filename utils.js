@@ -13,7 +13,7 @@ export function formatTask(task) {
 }
 
 export default function divider() {
-    console.log("=".repeat(25))
+    console.log("═".repeat(25))
 }
 
 
@@ -38,7 +38,7 @@ export function banner(text, col) {
 
 export function displayHelpInstructions() {
     console.log("")
-    console.log("   tsk [command] [<options>/arguments]");
+    console.log(`   ${chalk.yellow("tsk")} [command] [<options>/arguments]`);
     console.log("")
     console.log(chalk.green("   COMMANDS:"));
     console.log("       add \"Task description\"");
