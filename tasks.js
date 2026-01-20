@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const FILE = path.join(__dirname, "tasks.json");
 
-// Load tasks from file (or empty array if file doesn't exist)
+// storage
 function loadTasks() {
     if (!fs.existsSync(FILE)) return [];
     const data = fs.readFileSync(FILE, "utf-8");
@@ -18,6 +18,8 @@ function loadTasks() {
 function saveTasks(tasks) {
     fs.writeFileSync(FILE, JSON.stringify(tasks, null, 2));
 }
+
+// Actions
 
 function nextId(arr) {
     const ids = arr.map(t => t.id)
@@ -66,6 +68,18 @@ export function deleteTask(id) {
         return removed;
     }
     return null;
+}
+
+export function updateTask(id, title) {
+    const tasks = loadTasks()
+    const task = tasks.find(t => t.id === id)
+
+    if (task) {
+        task.title = title
+        saveTasks(tasks)
+        return task
+    }
+    return null
 }
 
 export function clearTasks() {

@@ -9,7 +9,6 @@ export function formatTask(task) {
     } else {
         return `[ ] ${task.id}. ${task.title}`
     }
-    // return `[${task.completed ? "✔" : " "}] ${task.id}: ${task.title}`
 }
 
 export default function divider() {
@@ -42,6 +41,7 @@ export function banner(text, col) {
         console.log("")
 }
 
+// Help instructions
 export function displayHelpInstructions() {
     console.log("")
     console.log(`   ${chalk.yellow("tsk")} [command] [<options>/arguments]`);

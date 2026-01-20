@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { addTask, listTasks, completeTask, deleteTask, clearTasks } from "../tasks.js";
+import { addTask, listTasks, completeTask, deleteTask, clearTasks, updateTask } from "../tasks.js";
 
 import divider, { formatTask, banner, displayHelpInstructions } from "../utils.js";
 
@@ -39,9 +39,9 @@ switch (command) {
         }
         const task = completeTask(id);
         if (task) {
-            console.log(chalk.green("✅ Task completed:", formatTask(task)));
+            console.log("✅ Task completed:", chalk.green(formatTask(task)));
         } else {
-            console.log("❌ Task not found.");
+            console.log(chalk.red("❌ Task not found."));
         }
         break;
     }
@@ -64,6 +64,26 @@ switch (command) {
     case "clear": {   // command: clear - it clears the tasks list
         clearTasks();
         console.log("✅ Tasks list cleared.");
+        break;
+    }
+
+    case "update": {
+        const id = parseInt(args[0], 10);
+        if (isNaN(id)) {
+            console.log("❌ Please provide a valid task ID.");
+            break;
+        }
+        const title = args.slice(1).join(" ");
+        if (!title) {
+            console.log("❌ Please provide a task title.");
+            break;
+        }
+        const task = updateTask(id, title);
+        if (task) {
+            console.log("✅ Task updated:", chalk.cyan(formatTask(task)));
+        } else {
+            console.log("❌ Task not found.");
+        }
         break;
     }
 
