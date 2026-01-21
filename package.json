@@ -15,7 +15,9 @@
     "clear": "node main.js clear",
     "help": "node main.js help"
   },
-  "keywords": [],
+  "keywords": [
+    "task", "manager", "cli", "productivity", "organizer"
+  ],
   "author": "",
   "license": "MIT",
   "description": "",
