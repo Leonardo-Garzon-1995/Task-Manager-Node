@@ -51,6 +51,7 @@ export function displayHelpInstructions() {
     console.log("       list");
     console.log("       complete <taskId>");
     console.log("       delete <taskId>");
+    console.log("       update <taskId> \"New Task description\"");
     console.log("       clear");
     console.log("       help");
 }
