@@ -11,7 +11,9 @@ const [,, command, ...args] = process.argv
 function main() {
 
     switch (command) {
-        case "add": {   //command: add "write a task "
+        case "-a":
+        case "a":
+        case "add": {  
             const title = args.join(" ")
             if (!title) {
                 console.log("❌ Please provide a task title.")
@@ -22,6 +24,8 @@ function main() {
             break;
         }
 
+        case "-l":
+        case "ls":
         case "list": {  // command: list - it shows the updated list
             const colors = ["red", "green", "yellow", "blue", "magenta", "cyan", "white", "brightred", "brightgreen", "brightyellow", "brightblue", "brightmagenta", "brightcyan", "reset"];
             const randomColor = colors[Math.floor(Math.random() * colors.length)];
@@ -30,9 +34,13 @@ function main() {
 
             listTasks().forEach(task => console.log(formatTask(task)));
             console.log("");
+            console.log("=".repeat(25));
+            console.log("");
             break;
         }
 
+        case "-c":
+        case "c":
         case "complete": {  //command: complete # - it shows which task has been completed
             const id = parseInt(args[0], 10);
             if (isNaN(id)) {
@@ -48,6 +56,8 @@ function main() {
             break;
         }
 
+        case "-d":
+        case "d":
         case "delete": {   // command: delete # - deletes the selected task
             const id = parseInt(args[0], 10);
             if (isNaN(id)) {
@@ -63,12 +73,14 @@ function main() {
             break;
         }
 
-        case "clear": {   // command: clear - it clears the tasks list
+        case "clear": { 
             clearTasks();
             console.log("✅ Tasks list cleared.");
             break;
         }
 
+        case "-u":
+        case "u":
         case "update": {
             const id = parseInt(args[0], 10);
             if (isNaN(id)) {
@@ -89,6 +101,7 @@ function main() {
             break;
         }
 
+        case "-h":
         case "help": {   // command: help - it shows the help instructions
             displayHelpInstructions();
             break;
