@@ -51,9 +51,9 @@ export function displayHelpInstructions() {
     console.log(chalk.green("   COMMANDS:"));
     console.log(`       add, a, -a ${colors.gray}"Task description"${colors.reset}`);
     console.log(`       list, l, -l`);
-    console.log(`       complete ${colors.gray}<taskId>${colors.reset}`);
-    console.log(`       delete ${colors.gray}<taskId>${colors.reset}`);
-    console.log(`       update ${colors.gray}<taskId> "New Task description"${colors.reset}`);
+    console.log(`       complete, c, -c ${colors.gray}<taskId>${colors.reset}`);
+    console.log(`       delete, d, -d ${colors.gray}<taskId>${colors.reset}`);
+    console.log(`       update, u, -u ${colors.gray}<taskId> "New Task description"${colors.reset}`);
     console.log("       clear");
     console.log("       help, -h,");
 }
