@@ -5,7 +5,7 @@ import chalk from "chalk";
 // How the tasks will be displayed on the console
 export function formatTask(task) {
     if (task.completed) {
-        return chalk.green(`[✔] ${task.id}. ${task.title}`)
+        return chalk.green(`[\u2713] ${task.id}. ${task.title}`)
     } else {
         return `[ ] ${task.id}. ${task.title}`
     }
