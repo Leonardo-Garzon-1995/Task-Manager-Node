@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const FILE = path.join(__dirname, "tasks.json");
+const FILE = path.join(__dirname, "..", "tasks.json");
 
 // storage
 function loadTasks() {
@@ -25,6 +25,7 @@ function nextId(arr) {
     const ids = arr.map(t => t.id)
     return ids.length ? Math.max(...ids) + 1 : 1
 }
+
 export function addTask(title) {
     const tasks = loadTasks()
     const task = { 
