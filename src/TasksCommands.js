@@ -1,5 +1,5 @@
 import { addTask, listTasks, completeTask, deleteTask, clearTasks, updateTask } from "../src/tasks.js";
-import { formatTask, banner, displayHelpInstructions } from "../src/utils.js";
+import { formatTask, banner} from "../src/utils.js";
 import chalk from "chalk";
 
 class TasksCommands {

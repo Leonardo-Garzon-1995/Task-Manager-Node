@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import TasksCommands from "../src/TasksCommands.js";
-import { formatTask, banner, displayHelpInstructions } from "../src/utils.js";
+import { displayHelpInstructions } from "../src/utils.js";
 
-import chalk from "chalk";
 
 const [,, command, ...args] = process.argv
 

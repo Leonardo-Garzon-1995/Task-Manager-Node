@@ -7,19 +7,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const FILE = path.join(__dirname, "..", "tasks.json");
 
-// storage
+// STORAGE MANAGEMENT
 function loadTasks() {
     if (!fs.existsSync(FILE)) return [];
     const data = fs.readFileSync(FILE, "utf-8");
     return data ? JSON.parse(data) : [];
 }
 
-// Save tasks back to file
 function saveTasks(tasks) {
     fs.writeFileSync(FILE, JSON.stringify(tasks, null, 2));
 }
 
-// Actions
+// ACTIONS
 
 function nextId(arr) {
     const ids = arr.map(t => t.id)
