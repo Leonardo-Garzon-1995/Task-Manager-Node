@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import chalk from "chalk";
+import { ApiError } from "../src/errors.js";
 import TasksCommands from "../src/TasksCommands.js";
 import { displayHelpInstructions } from "../src/utils.js";
 

@@ -1,12 +1,5 @@
+import { ApiError } from "./errors.js";
 const BASE_URL = (process.env.TSK_API_URL ?? 'https://localhost:3000').replace(/\/+$/, "");
-
-export class ApiError extends Error {
-    constructor(message, { status, cause } = {}) {
-        super(message, { cause })
-        this.name = "ApiError"
-        this.status = status // undefined means the server was unreacheable
-    }
-}
 
 async function request(method, path, body) {
     let res;
