@@ -1,87 +1,40 @@
-// tasks.js
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+const BASE_URL = (process.env.TSK_API_URL ?? 'https://localhost:3000').replace(/\/+$/, "");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const FILE = path.join(__dirname, "..", "tasks.json");
-
-// STORAGE MANAGEMENT
-function loadTasks() {
-    if (!fs.existsSync(FILE)) return [];
-    const data = fs.readFileSync(FILE, "utf-8");
-    return data ? JSON.parse(data) : [];
+export class ApiError extends Error {
+    constructor(message, { status, cause } = {}) {
+        super(message, { cause })
+        this.name = "ApiError"
+        this.status = status // undefined means the server was unreacheable
+    }
 }
 
-function saveTasks(tasks) {
-    fs.writeFileSync(FILE, JSON.stringify(tasks, null, 2));
-}
+async function request(method, path, body) {
+    let res;
 
-// ACTIONS
+    try {
+        res = await fetch(`${BASE_URL}${path}`, {
+            method,
+            headers: body ? { "Content-Type": "application/json"} : undefined,
+            body: body ? JSON.stringify(body) : undefined,
+            signal: AbortSignal.timeout(8000)
+        })
+    } catch (error) {
+        throw new ApiError("Cannot reach the server", { cause: err })
+    }
+    if (res.status === 204) return null
+    const data = await res.json().catch(() => null)
 
-function nextId(arr) {
-    const ids = arr.map(t => t.id)
-    return ids.length ? Math.max(...ids) + 1 : 1
-}
-
-export function addTask(title) {
-    const tasks = loadTasks()
-    const task = { 
-        id: nextId(tasks),
-        date: new Date().toLocaleString(),
-        title,
-        completed: false
+    if (!res.ok) {
+        throw new ApiError(data?.error ?? `Request failed (${res.status})`, { status: res.status })
     }
 
-    tasks.push(task)
-    saveTasks(tasks)
-    return task
+    return data
 }
 
-export function listTasks() {
-    if (!fs.existsSync(FILE) || fs.readFileSync(FILE, "utf-8") === "[]") {
-        console.log("Tasks list is empty.");
-    }
-    return loadTasks()
-}
+const enc = encodeURIComponent;
 
-export function completeTask(id) {
-    const tasks = loadTasks()
-    const task = tasks.find(t => t.id === id)
-
-    if (task) {
-        task.completed = true
-        saveTasks(tasks)
-        return task
-    }
-    return null
-}
-
-export function deleteTask(id) {
-    let tasks = loadTasks();
-    const index = tasks.findIndex(t => t.id === id);
-
-    if (index !== -1) {
-        const [removed] = tasks.splice(index, 1);
-        saveTasks(tasks);
-        return removed;
-    }
-    return null;
-}
-
-export function updateTask(id, title) {
-    const tasks = loadTasks()
-    const task = tasks.find(t => t.id === id)
-
-    if (task) {
-        task.title = title
-        saveTasks(tasks)
-        return task
-    }
-    return null
-}
-
-export function clearTasks() {
-    fs.writeFileSync(FILE, "[]")
-}
+export const addTask = (title) => request("POST", "/tasks", { title })
+export const listTasks = () => request("GET", "/tasks")
+export const completeTask = (prefix) => request("PATCH", `/tasks/${enc(prefix)}`, { completed: true })
+export const updateTasks = (prefix, title) => request("PATCH", `/tasks/${enc(prefix)}`, { title })
+export const deleteTask = (prefix) => request("DELETE", `/tasks/${enc(prefix)}`)
