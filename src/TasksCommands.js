@@ -1,49 +1,62 @@
-import { addTask, listTasks, completeTask, deleteTask, clearTasks, updateTask } from "../src/tasks.js";
+import { 
+    addTask, 
+    listTasks, 
+    completeTask, 
+    deleteTask,  
+    updateTask 
+} from "../src/tasks.js";
 import { formatTask, banner} from "../src/utils.js";
 import chalk from "chalk";
 
 class TasksCommands {
     
-    static add(title) {
+    static async add(title) {
         if (!title) {
-            console.log("❌ Please provide a task title.");
+            console.error("❌ Please provide a task title.");
+            process.exitCode = 1
             return;
         }
-        const task = addTask(title);
+        const task = await addTask(title);
         console.log("✅ Task added:", chalk.cyan(formatTask(task)));
     }
 
-    static list() {
+    static async list() {
         const colors = ["red", "green", "yellow", "blue", "magenta", "cyan", "white", "brightred", "brightgreen", "brightyellow", "brightblue", "brightmagenta", "brightcyan", "reset"];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
-            banner("TASK LIST", randomColor);
+        banner("TASK LIST", randomColor);
 
-            listTasks().forEach(task => console.log(formatTask(task)));
-            console.log("");
-            console.log("=".repeat(25));
-            console.log("");
+        const tasks = await listTasks()
+        if (!tasks || !Array.isArray(tasks) || tasks.length === 0) {
+            console.log("No tasks found.");
+            return;
+        }
+
+        tasks.forEach(task => console.log(formatTask(task)));
+        console.log("");
+        console.log("=".repeat(25));
+        console.log("");
     }
 
-    static complete(id) {
-        if (isNaN(id)) {
-                console.log("❌ Please provide a valid task ID.");
-                return
-        }
-        const task = completeTask(id);
-        if (task) {
-            console.log("✅ Task completed:", chalk.green(formatTask(task)));
-        } else {
-            console.log(chalk.red("❌ Task not found."));
-        }
+    static async complete(prefix) {
+       if (!prefix) {
+        console.error("❌ Please provide a task ID.")
+        process.exitCode = 1
+        return
+       }
+
+       const task = await completeTask(prefix)
+
+       console.log("✅ Task completed:", chalk.green(formatTask(task)))
     }
 
-    static delete(id) {
-        if (isNaN(id)) {
-                console.log("❌ Please provide a valid task ID.");
-                return;
-            }
-        const task = deleteTask(id);
+    static async delete(prefix) {
+        if (!prefix) {
+            console.error("❌ Please provide a task ID.")
+            process.exitCode = 1
+            return
+        }
+        const task = await deleteTask(prefix);
         if (task) {
             console.log(chalk.red("🗑️ Task deleted:", formatTask(task)));
         } else {
@@ -52,23 +65,20 @@ class TasksCommands {
         return;
     }
 
-    static clear() {
-        clearTasks();
-        console.log("✅ Tasks list cleared.");
-        return
-    }
 
-    static update(id, title) {
-        if (isNaN(id)) {
-                console.log("❌ Please provide a valid task ID.");
-                return;
+    static async update(prefix, title) {
+        if (!prefix) {
+            console.error("❌ Please provide a task ID.")
+            process.exitCode = 1
+            return
         }
         
         if (!title) {
-            console.log("❌ Please provide a task title.");
+            console.error("❌ Please provide a task title.");
+            process.exitCode = 1
             return;
         }
-        const task = updateTask(id, title);
+        const task = await updateTask(prefix, title);
         if (task) {
             console.log("✅ Task updated:", chalk.cyan(formatTask(task)));
         } else {
