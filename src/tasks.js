@@ -1,18 +1,22 @@
 import { ApiError } from "./errors.js";
-const BASE_URL = (process.env.TSK_API_URL ?? 'https://localhost:3000').replace(/\/+$/, "");
+import { loadConfig } from './config/config.js'
 
 async function request(method, path, body) {
+    const { apiUrl, apiKey } = loadConfig();
     let res;
 
     try {
-        res = await fetch(`${BASE_URL}${path}`, {
+        res = await fetch(`${apiUrl}${path}`, {
             method,
-            headers: body ? { "Content-Type": "application/json"} : undefined,
+            headers: {
+                ...(body && { "Content-Type": "application/json" }),
+                ...(apiKey && { Authorization: `Bearer ${apiKey}` }),
+            },
             body: body ? JSON.stringify(body) : undefined,
             signal: AbortSignal.timeout(8000)
         })
     } catch (error) {
-        throw new ApiError("Cannot reach the server", { cause: err })
+        throw new ApiError("Cannot reach the server", { cause: error })
     }
     if (res.status === 204) return null
     const data = await res.json().catch(() => null)

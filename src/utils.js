@@ -49,11 +49,11 @@ export function displayHelpInstructions() {
     console.log(`   ${chalk.yellow("tsk")} [command] [<options>/arguments]`);
     console.log("")
     console.log(chalk.green("   COMMANDS:"));
-    console.log(`       add, a, -a ${colors.gray}"Task description"${colors.reset}`);
-    console.log(`       list, l, -l`);
-    console.log(`       complete, c, -c ${colors.gray}<taskId>${colors.reset}`);
-    console.log(`       delete, d, -d ${colors.gray}<taskId>${colors.reset}`);
-    console.log(`       update, u, -u ${colors.gray}<taskId> "New Task description"${colors.reset}`);
-    console.log("       clear");
+    console.log(`       add, -a ${colors.gray}"Task description"${colors.reset}`);
+    console.log(`       list, -l`);
+    console.log(`       complete, -c ${colors.gray}<taskId>${colors.reset}`);
+    console.log(`       delete, -d ${colors.gray}<taskId>${colors.reset}`);
+    console.log(`       update, -u ${colors.gray}<taskId> "New Task description"${colors.reset}`);
+    // console.log("       clear");
     console.log("       help, -h,");
 }

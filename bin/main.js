@@ -10,11 +10,12 @@ const [,, command, ...args] = process.argv
 function consoleErrorMessage(error) {
     if (error.status === undefined) return "Can't reach the task server. Check your connection and TSK_API_URL."
     if (error.status === 500) return "The server had a problem. Try again in a moment.";
-
+    if (error.status === 401) return "The server rejected your API key. Check apiKey in your tsk config.";
+    
     return error.message
 }
 
-function main() {
+async function  main() {
     const [first, ...rest] = args
 
     switch (command) {
@@ -47,7 +48,7 @@ function main() {
 }
 
 main().catch((error) => {
-    console.error(chalk.red(`❌ ${err instanceof ApiError ? consoleErrorMessage(error) : "Unexpected error"}`))
+    console.error(chalk.red(`❌ ${error instanceof ApiError ? consoleErrorMessage(error) : "Unexpected error"}`))
     if (process.env.TSK_DEBUG) console.error(error)
     process.exitCode = 1
 }) 

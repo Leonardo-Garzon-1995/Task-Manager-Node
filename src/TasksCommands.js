@@ -3,7 +3,7 @@ import {
     listTasks, 
     completeTask, 
     deleteTask,  
-    updateTask 
+    updateTasks 
 } from "../src/tasks.js";
 import { formatTask, banner} from "../src/utils.js";
 import chalk from "chalk";
@@ -24,13 +24,13 @@ class TasksCommands {
         const colors = ["red", "green", "yellow", "blue", "magenta", "cyan", "white", "brightred", "brightgreen", "brightyellow", "brightblue", "brightmagenta", "brightcyan", "reset"];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
-        banner("TASK LIST", randomColor);
-
         const tasks = await listTasks()
         if (!tasks || !Array.isArray(tasks) || tasks.length === 0) {
             console.log("No tasks found.");
             return;
         }
+        
+        banner("TASK LIST", randomColor);
 
         tasks.forEach(task => console.log(formatTask(task)));
         console.log("");
@@ -78,7 +78,7 @@ class TasksCommands {
             process.exitCode = 1
             return;
         }
-        const task = await updateTask(prefix, title);
+        const task = await updateTasks(prefix, title);
         if (task) {
             console.log("✅ Task updated:", chalk.cyan(formatTask(task)));
         } else {
