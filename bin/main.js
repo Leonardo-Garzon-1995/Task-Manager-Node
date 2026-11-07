@@ -7,50 +7,47 @@ import { displayHelpInstructions } from "../src/utils.js";
 
 const [,, command, ...args] = process.argv
 
+function consoleErrorMessage(error) {
+    if (error.status === undefined) return "Can't reach the task server. Check your connection and TSK_API_URL."
+    if (error.status === 500) return "The server had a problem. Try again in a moment.";
+
+    return error.message
+}
+
 function main() {
-    const id = parseInt(args[0], 10);
-    const title = args.join(" ")
-    const updateTitle = args.slice(1).join(" ");
+    const [first, ...rest] = args
 
     switch (command) {
         case "-a":
-        case "a":
         case "add": 
-            TasksCommands.add(title)
-            break;
+            return TasksCommands.add(args.join())
+        case undefined:
         case "-l":
-        case "ls":
         case "list":  // command: list - it shows the updated list
-            TasksCommands.list()
-            break;
+            return TasksCommands.list()
         case "-c":
-        case "c":
         case "complete":   //command: complete # - it shows which task has been completed
-            TasksCommands.complete(id)
-            break;
+            return TasksCommands.complete(first)
         case "-d":
-        case "d":
         case "delete": // command: delete # - deletes the selected task
-            TasksCommands.delete(id)
-            break;
-        case "clear": 
-            TasksCommands.clear()
-            break;
+            return TasksCommands.delete(first)
         case "-u":
-        case "u":
         case "update":
-            TasksCommands.update(id, updateTitle)
-            break;
+            return TasksCommands.update(first, rest.join(" "))
         case "-h":
         case "help":  // command: help - it shows the help instructions
-            displayHelpInstructions();
-            break;
+            return displayHelpInstructions();
 
         default: // command: list - it shows the updated list
-            TasksCommands.list()
-            break;
+            console.error(chalk.red(`❌ Unknown command: ${command}`))
+            displayHelpInstructions()
+            process.exitCode = 1
 
     }
 }
 
-main();
+main().catch((error) => {
+    console.error(chalk.red(`❌ ${err instanceof ApiError ? consoleErrorMessage(error) : "Unexpected error"}`))
+    if (process.env.TSK_DEBUG) console.error(error)
+    process.exitCode = 1
+}) 
