@@ -5,6 +5,11 @@ async function request(method, path, body) {
     const { apiUrl, apiKey } = loadConfig();
     let res;
 
+    const notice = setTimeout(
+        () => console.error("Waking the server, this can take up to a minute..."),
+        3000
+    )
+
     try {
         res = await fetch(`${apiUrl}${path}`, {
             method,
@@ -13,11 +18,17 @@ async function request(method, path, body) {
                 ...(apiKey && { Authorization: `Bearer ${apiKey}` }),
             },
             body: body ? JSON.stringify(body) : undefined,
-            signal: AbortSignal.timeout(8000)
+            signal: AbortSignal.timeout(75000)
         })
     } catch (error) {
+        if (error.name === 'TimeoutError') {
+            throw new ApiError('The server took too long to respond. Try again in a moment',  { cause: error, code: 'TIMEOUT'})
+        }
         throw new ApiError("Cannot reach the server", { cause: error })
+    } finally {
+        clearTimeout(notice)
     }
+    
     if (res.status === 204) return null
     const data = await res.json().catch(() => null)
 

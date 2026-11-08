@@ -8,6 +8,7 @@ import { displayHelpInstructions } from "../src/utils.js";
 const [,, command, ...args] = process.argv
 
 function consoleErrorMessage(error) {
+    if (error.code) return error.message
     if (error.status === undefined) return "Can't reach the task server. Check your connection and TSK_API_URL."
     if (error.status === 500) return "The server had a problem. Try again in a moment.";
     if (error.status === 401) return "The server rejected your API key. Check apiKey in your tsk config.";
@@ -21,7 +22,7 @@ async function  main() {
     switch (command) {
         case "-a":
         case "add": 
-            return TasksCommands.add(args.join())
+            return TasksCommands.add(args.join(' '))
         case undefined:
         case "-l":
         case "list":  // command: list - it shows the updated list

@@ -29,7 +29,7 @@ class TasksCommands {
             console.log("No tasks found.");
             return;
         }
-        
+
         banner("TASK LIST", randomColor);
 
         tasks.forEach(task => console.log(formatTask(task)));
@@ -56,12 +56,14 @@ class TasksCommands {
             process.exitCode = 1
             return
         }
-        const task = await deleteTask(prefix);
-        if (task) {
-            console.log(chalk.red("🗑️ Task deleted:", formatTask(task)));
-        } else {
-            console.log("❌ Task not found.");
+        try {
+
+            await deleteTask(prefix);
+            console.log(chalk.red("🗑️ Task deleted"));
+        } catch (error) {
+            console.error(`❌ ${error.message}`);
         }
+        
         return;
     }
 
